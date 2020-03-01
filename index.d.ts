@@ -22,7 +22,7 @@ export let users: usersInterface
 export let videos: videosInterface
 export let other: otherInterface
 
-declare type callbackFunc = ( error: any, response: any ) => void;
+declare type callbackFunc = (error: any, response: any) => void;
 
 // Endpoint Functions
 interface authInterface {
@@ -92,7 +92,7 @@ interface feedInterface {
     }, callback: callbackFunc): void
 
     /** Deletes a specified reaction to a specified post in a specified channel feed. The reaction is specified by an emote ID (for example, “25” is Kappa) or the string “endorse” (which corresponds to a default face emote). */
-    deleteReaction(data: { 
+    deleteReaction(data: {
         auth: string
         channelID: string
         postID: string
@@ -245,7 +245,7 @@ interface channelsInterface {
 }
 
 interface chatInterface {
-    
+
     /** Gets a list of badges that can be used in chat for a specified channel. */
     badges(data: {
         channelID: string
@@ -261,19 +261,19 @@ interface chatInterface {
 
     /** Gets a list of chat rooms determined by if the auth token is a channel mod, sub, or normal user */
     rooms(data: {
-      auth: string
-      channelID: string
+        auth: string
+        channelID: string
     }, callback: callbackFunc): void
 }
 
 interface clipsInterface {
-    
+
     /** Gets details about a specified Clip. Clips are referenced by a randomly generated string called a slug. Every clip has a globally unique slug. */
     getClip(data: {
         channelName: string
         slug: string
     }, callback: callbackFunc): void
-    
+
     /** Gets the top Clips which meet a specified set of parameters. */
     top(data: {
         channel?: string
@@ -295,7 +295,7 @@ interface clipsInterface {
 }
 
 interface collectionsInterface {
-    
+
     /** Gets summary information about a specified collection. This does not return the collection items (videos). */
     getMetadata(data: {
         collectionID: string
@@ -366,7 +366,7 @@ interface collectionsInterface {
 }
 
 interface communitiesInterface {
-    
+
     /** Gets a specified community. */
     getByName(data: {
         name: string
@@ -499,7 +499,7 @@ interface communitiesInterface {
 }
 
 interface gamesInterface {
-    
+
     /** Gets games sorted by number of current viewers on Twitch, most popular first. */
     top(data: {
         limit?: number
@@ -508,13 +508,13 @@ interface gamesInterface {
 }
 
 interface ingestsInterface {
-    
+
     /** Gets a list of Twitch ingest servers. */
     serverList(data: {}, callback: callbackFunc): void
 }
 
 interface searchInterface {
-    
+
     /** Searches for channels based on a specified query parameter. */
     channels(data: {
         query: string
@@ -538,7 +538,7 @@ interface searchInterface {
 }
 
 interface streamsInterface {
-    
+
     /** Gets stream information (the stream object) for a specified user. */
     channel(data: {
         channelID: string
@@ -576,7 +576,7 @@ interface streamsInterface {
 }
 
 interface teamsInterface {
-    
+
     /** Gets all active teams. */
     getAll(data: {
         limit?: number
@@ -590,7 +590,7 @@ interface teamsInterface {
 }
 
 interface usersInterface {
-    
+
     /** Gets a user object based on the OAuth token provided. */
     user(data: {
         auth: string
@@ -670,7 +670,7 @@ interface usersInterface {
         sourceUserID: string
         targetUserID: string
     }, callback: callbackFunc): void
-    
+
     /** Creates a connection between a user (an authenticated Twitch user, linked to a game user) and VHS, and starts returning the user’s VHS data in each heartbeat. The game user is specified by a required identifier parameter. */
     createVHS(data: {
         auth: string
@@ -689,10 +689,17 @@ interface usersInterface {
 }
 
 interface videosInterface {
-    
+
     /** Gets a specified video object. */
     getVideo(data: {
         videoID: string
+    }, callback: callbackFunc): void
+
+    /** Gets chat comments from a video object, with optional timestamp (offset). */
+    getVideoChat(data: {
+        videoID: string,
+        offset?: number,
+        cursor?: string
     }, callback: callbackFunc): void
 
     /** Gets the top videos based on viewcount, optionally filtered by game or time period. */
@@ -730,13 +737,13 @@ interface videosInterface {
 
     /** Uploads part of a video. Each part of a video is uploaded with a separate request. Each video part except the last part must be at least 5 MB and at most 25 MB. The total of all parts cannot exceed 10 GB. */
     upload(data: {
-        "content-length":  string
+        "content-length": string
         videoData: number
         videoID: string
         part: number
         token: string
     }, callback: callbackFunc): void
-    
+
     /** After you upload all the parts of a video, you complete the upload process with this endpoint. */
     complete(data: {
         videoID: string
@@ -762,7 +769,7 @@ interface videosInterface {
 }
 
 interface otherInterface {
-    
+
     /** Get list of users currently in a channels chat */
     chatters(data: {
         channelName: string
@@ -783,7 +790,7 @@ interface otherInterface {
         auth: string
         channelName: string
     }, callback: callbackFunc): void
-    
+
     /** Get random stream */
     randomStream(data: {}, callback: callbackFunc): void
 
